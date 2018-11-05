@@ -1,9 +1,12 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import reducer from './reducers/reducer';
+
+import CurrentFlashardAppBar from './components/containers/CurrentFlashardAppBar';
 import CurrentFlashcardDeck from './components/containers/CurrentFlashcardDeck';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
 import 'typeface-roboto';
 
 const store = createStore(reducer);
@@ -11,12 +14,15 @@ const store = createStore(reducer);
 class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <>
         <CssBaseline />
         <Provider store={store}>
-          <CurrentFlashcardDeck />
+          <>
+            <CurrentFlashardAppBar />
+            <CurrentFlashcardDeck />
+          </>
         </Provider>
-      </React.Fragment>
+      </>
     );
   }
 }
