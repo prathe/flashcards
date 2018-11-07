@@ -9,6 +9,14 @@ const initialState = {
         [
           'This is recto 2',
           'This is verso 2',
+        ],
+        [
+          'This is recto 3',
+          'This is verso 3',
+        ],
+        [
+          'This is recto 4',
+          'This is verso 4',
         ]
       ]
     }

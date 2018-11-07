@@ -4,9 +4,9 @@ import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import TextField from "@material-ui/core/TextField";
 
-const Flashcard = ({recto, verso}) => {
+const Flashcard = ({recto, verso, ...otherProps}) => {
   return (
-    <Step>
+    <Step {...otherProps}>
       <StepLabel />
       <StepContent icon="">
         <TextField
