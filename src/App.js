@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import reducer from './reducers/reducer';
+import reducer from './redux/reducer';
 
 import CurrentFlashardAppBar from './components/containers/CurrentFlashardAppBar';
 import CurrentFlashcardDeck from './components/containers/CurrentFlashcardDeck';

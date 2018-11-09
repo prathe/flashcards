@@ -6,16 +6,19 @@ import StepLabel from "@material-ui/core/StepLabel"
 import StepContent from "@material-ui/core/StepContent"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
+import { throwFlashcard, skipFlashcard } from '../../redux/actions'
 
 const FlashcardDeck = (props) => {
-  const [activeStep, setActiveStep] = useState(0)
-
   const handleSkip = () => {
-    setActiveStep((activeStep + 1) % props.flashcards.length)
+    skipFlashcard(props.current)
+  }
+
+  const handleGotIt = () => {
+    props.dispatch(throwFlashcard(props.current))
   }
 
   const isStepCompleted = index => (
-    props.completedSteps.find((i) => (i == index))
+    props.completedSteps.findIndex((i) => (i == index)) >= 0
   )
 
   const SkipButton = props => (
@@ -37,6 +40,7 @@ const FlashcardDeck = (props) => {
       color="primary"
       size="small"
       className={props.classes.button}
+      onClick={handleGotIt}
     >
       GOT IT
     </Button>
@@ -48,7 +52,7 @@ const FlashcardDeck = (props) => {
     <Stepper
       orientation="vertical"
       nonLinear={true}
-      activeStep={activeStep}
+      activeStep={props.current}
     >
       {props.flashcards.map((flashcard, index) => {
         const recto= flashcard[0]

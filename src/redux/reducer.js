@@ -1,7 +1,10 @@
+import { THROW_FLASHCARD } from './actions'
+
 const initialState = {
   decks: [
     {
       name: 'My first deck',
+      current: 0,
       completedSteps: [],
       flashcards: [
         [
@@ -25,8 +28,22 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  //return { ...state }
-  return state
+  const [deck, ...restDeck] = state.decks
+
+  if (action.type == THROW_FLASHCARD) {
+    return {
+      decks: [ 
+        ...restDeck,
+        {
+          ...deck,
+          current: (deck.current + 1) % deck.flashcards.length,
+          completedSteps: deck.completedSteps.concat([action.index]),
+        }
+      ]
+    }
+  } else {
+    return state
+  }
 }
 
 export default reducer;
