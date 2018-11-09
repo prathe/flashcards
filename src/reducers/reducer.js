@@ -2,6 +2,7 @@ const initialState = {
   decks: [
     {
       name: 'My first deck',
+      completedSteps: [],
       flashcards: [
         [
           'This is recto',

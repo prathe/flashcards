@@ -10,6 +10,40 @@ import Button from "@material-ui/core/Button"
 const FlashcardDeck = (props) => {
   const [activeStep, setActiveStep] = useState(0)
 
+  const handleSkip = () => {
+    setActiveStep((activeStep + 1) % props.flashcards.length)
+  }
+
+  const isStepCompleted = index => (
+    props.completedSteps.find((i) => (i == index))
+  )
+
+  const SkipButton = props => (
+    <Button
+      variant="contained"
+      size="small"
+      className={props.classes.button}
+      onClick={handleSkip}
+    >
+      Skip
+    </Button>
+  )
+  // https://material-ui.com/guides/composition/
+  SkipButton.muiName = 'Button'
+
+  const GotItButton = props => (
+    <Button
+      variant="contained"
+      color="primary"
+      size="small"
+      className={props.classes.button}
+    >
+      GOT IT
+    </Button>
+  )
+  // https://material-ui.com/guides/composition/
+  SkipButton.muiName = 'Button'
+
   return (
     <Stepper
       orientation="vertical"
@@ -21,7 +55,10 @@ const FlashcardDeck = (props) => {
         const verso= flashcard[1]
 
         return (
-          <Step key={index}>
+          <Step
+            key={index}
+            completed={isStepCompleted(index)}
+          >
             <StepLabel />
             <StepContent icon="">
               <TextField
@@ -34,21 +71,8 @@ const FlashcardDeck = (props) => {
                 value={recto}
               />
               <div>
-                <Button
-                  variant="contained"
-                  size="small"
-                  className={props.classes.button}
-                >
-                  Skip
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  className={props.classes.button}
-                >
-                  GOT IT
-                </Button>
+                <SkipButton {...props} />
+                <GotItButton {...props} />
               </div>
             </StepContent>
           </Step>

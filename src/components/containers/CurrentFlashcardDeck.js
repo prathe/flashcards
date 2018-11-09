@@ -6,12 +6,13 @@ const mapStateToProps = state => {
 
   return {
     name: deck.name,
-    flashcards: deck.flashcards
+    flashcards: deck.flashcards,
+    completedSteps: deck.completedSteps,
   }
 }
 
 const CurrentFlashcardDeck = connect(
-  mapStateToProps
+  mapStateToProps,
 )(FlashcardDeck)
 
 export default CurrentFlashcardDeck
