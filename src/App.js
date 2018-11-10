@@ -3,8 +3,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import reducer from './redux/reducer';
 
-import CurrentFlashardAppBar from './components/containers/CurrentFlashardAppBar';
-import CurrentFlashcardDeck from './components/containers/CurrentFlashcardDeck';
+import FlashardAppBarContainer from './components/containers/FlashardAppBarContainer';
+import FlashcardDeckContainer from './components/containers/FlashcardDeckContainer';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'typeface-roboto';
@@ -18,8 +18,8 @@ class App extends React.Component {
         <CssBaseline />
         <Provider store={store}>
           <>
-            <CurrentFlashardAppBar />
-            <CurrentFlashcardDeck />
+            <FlashardAppBarContainer />
+            <FlashcardDeckContainer />
           </>
         </Provider>
       </>
