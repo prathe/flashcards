@@ -10,7 +10,7 @@ import { throwFlashcard, skipFlashcard } from '../../redux/actions'
 
 const FlashcardDeck = (props) => {
   const handleSkip = () => {
-    skipFlashcard(props.currentFlashcard)
+    props.dispatch(skipFlashcard(props.currentFlashcard))
   }
 
   const handleGotIt = () => {

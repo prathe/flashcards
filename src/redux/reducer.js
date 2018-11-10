@@ -1,4 +1,4 @@
-import { THROW_FLASHCARD } from './actions'
+import { THROW_FLASHCARD, SKIP_FLASHCARD } from './actions'
 
 const initialState = {
   name: 'My first deck',
@@ -23,15 +23,31 @@ const initialState = {
   ]
 };
 
+const nextIndex = (current, max, except) => {
+  if (except.length === max)
+    return null;
+  return (current + 1) % max
+}
+
 const reducer = (state = initialState, action) => {
   // Throwing a flashcard means you're done with it.
   // Show the next flashcard in the remaining deck.
   // currentFlashcard may be set to null if no one remains.
   if (action.type == THROW_FLASHCARD) {
+    const completedFlashcards = state.completedFlashcards.concat([action.index])
+    const currentFlashcard = nextIndex(state.currentFlashcard, state.flashcards.length, completedFlashcards)
+
     return {
       ...state,
-      currentFlashcard: (state.currentFlashcard + 1) % state.flashcards.length,
-      completedFlashcards: state.completedFlashcards.concat([action.index]),
+      currentFlashcard: currentFlashcard,
+      completedFlashcards: completedFlashcards,
+    }
+  } else if (action.type == SKIP_FLASHCARD) {
+    const currentFlashcard = nextIndex(state.currentFlashcard, state.flashcards.length, state.completedFlashcards)
+
+    return {
+      ...state,
+      currentFlashcard: currentFlashcard
     }
   } else {
     return state
