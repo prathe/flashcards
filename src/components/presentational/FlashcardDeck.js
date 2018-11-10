@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
-import Stepper from "@material-ui/core/Stepper"
 import { withStyles } from '@material-ui/core/styles'
+import Stepper from "@material-ui/core/Stepper"
 import Step from "@material-ui/core/Step"
 import StepLabel from "@material-ui/core/StepLabel"
 import StepContent from "@material-ui/core/StepContent"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import { throwFlashcard, skipFlashcard, resetFlashcards } from '../../redux/actions'
+import { throwFlashcard, skipFlashcard } from '../../redux/actions'
+import FlashcardsActions from './FlashcardsActions'
 
 const FlashcardDeck = (props) => {
   const handleSkip = () => {
@@ -19,10 +20,6 @@ const FlashcardDeck = (props) => {
 
   const isStepCompleted = index => (
     props.completedFlashcards.findIndex((i) => (i == index)) >= 0
-  )
-
-  const handleReset = () => (
-    props.dispatch(resetFlashcards())
   )
 
   const SkipButton = props => (
@@ -88,17 +85,7 @@ const FlashcardDeck = (props) => {
         )
       })}
     </Stepper>
-    <div>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={props.classes.button}
-        onClick={handleReset}
-      >
-        Start Over
-      </Button> 
-    </div>
+    <FlashcardsActions {...props} />
     </>
   )
 }
