@@ -34,7 +34,14 @@ const reducer = (state = initialState, action) => {
   // Show the next flashcard in the remaining deck.
   // currentFlashcard may be set to null if no one remains.
   if (action.type == THROW_FLASHCARD) {
-    const completedFlashcards = state.completedFlashcards.concat([action.index])
+    if (action.index === null)
+      return state
+
+    // Don't dupplicate array elements
+    let completedFlashcards = state.completedFlashcards
+    if (completedFlashcards.findIndex((i) => (i === action.index)) < 0)
+      completedFlashcards = completedFlashcards.concat([action.index])
+
     const currentFlashcard = nextIndex(state.currentFlashcard, state.flashcards.length, completedFlashcards)
 
     return {
