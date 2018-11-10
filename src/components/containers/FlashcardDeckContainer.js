@@ -4,8 +4,8 @@ import FlashcardDeck from '../presentational/FlashcardDeck'
 const mapStateToProps = state => {
   return {
     name: state.name,
-    current: state.current,
-    completedSteps: state.completedSteps,
+    currentFlashcard: state.currentFlashcard,
+    completedFlashcards: state.completedFlashcards,
     flashcards: state.flashcards,
   }
 }

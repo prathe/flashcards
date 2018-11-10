@@ -2,8 +2,8 @@ import { THROW_FLASHCARD } from './actions'
 
 const initialState = {
   name: 'My first deck',
-  current: 0,
-  completedSteps: [],
+  currentFlashcard: 0,
+  completedFlashcards: [],
   flashcards: [
     [
       'This is recto',
@@ -24,11 +24,14 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  // Throwing a flashcard means you're done with it.
+  // Show the next flashcard in the remaining deck.
+  // currentFlashcard may be set to null if no one remains.
   if (action.type == THROW_FLASHCARD) {
     return {
       ...state,
-      current: (state.current + 1) % state.flashcards.length,
-      completedSteps: state.completedSteps.concat([action.index]),
+      currentFlashcard: (state.currentFlashcard + 1) % state.flashcards.length,
+      completedFlashcards: state.completedFlashcards.concat([action.index]),
     }
   } else {
     return state

@@ -10,15 +10,15 @@ import { throwFlashcard, skipFlashcard } from '../../redux/actions'
 
 const FlashcardDeck = (props) => {
   const handleSkip = () => {
-    skipFlashcard(props.current)
+    skipFlashcard(props.currentFlashcard)
   }
 
   const handleGotIt = () => {
-    props.dispatch(throwFlashcard(props.current))
+    props.dispatch(throwFlashcard(props.currentFlashcard))
   }
 
   const isStepCompleted = index => (
-    props.completedSteps.findIndex((i) => (i == index)) >= 0
+    props.completedFlashcards.findIndex((i) => (i == index)) >= 0
   )
 
   const SkipButton = props => (
@@ -52,7 +52,7 @@ const FlashcardDeck = (props) => {
     <Stepper
       orientation="vertical"
       nonLinear={true}
-      activeStep={props.current}
+      activeStep={props.currentFlashcard}
     >
       {props.flashcards.map((flashcard, index) => {
         const recto= flashcard[0]
