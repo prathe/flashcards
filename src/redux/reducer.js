@@ -1,4 +1,4 @@
-import { THROW_FLASHCARD, SKIP_FLASHCARD, RESET_FLASHCARD, ADD_FLASHCARD, JUMP_TO_FLASHCARD } from './actions'
+import { THROW_FLASHCARD, SKIP_FLASHCARD, RESET_FLASHCARD, ADD_FLASHCARD, JUMP_TO_FLASHCARD, REVEAL_ANSWER } from './actions'
 
 const initialState = {
   name: 'My first deck',
@@ -79,6 +79,14 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       currentFlashcard: action.index
+    }
+  } else if (action.type == REVEAL_ANSWER) {
+    let completedFlashcards = state.completedFlashcards
+    if (completedFlashcards.findIndex((i) => (i === action.index)) < 0)
+      completedFlashcards = completedFlashcards.concat([action.index])
+    return {
+      ...state,
+      completedFlashcards: completedFlashcards,    
     }
   } else {
     return state

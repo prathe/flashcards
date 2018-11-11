@@ -6,7 +6,7 @@ import StepButton from "@material-ui/core/StepButton"
 import StepContent from "@material-ui/core/StepContent"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import { throwFlashcard, skipFlashcard, jumpToFlashcard } from '../../redux/actions'
+import { throwFlashcard, skipFlashcard, jumpToFlashcard, revealAnswer } from '../../redux/actions'
 import FlashcardsActions from './FlashcardsActions'
 
 const FlashcardDeck = (props) => {
@@ -26,8 +26,9 @@ const FlashcardDeck = (props) => {
     setflippedCard()
   }
 
-  const handleFlip = () => {
+  const handleRevealAnswer = () => {
     setflippedCard(flippedCard !== props.currentFlashcard ? props.currentFlashcard : null)
+    props.dispatch(revealAnswer(props.currentFlashcard))
   }
 
   const handleStep = index => () => {
@@ -39,17 +40,17 @@ const FlashcardDeck = (props) => {
     props.completedFlashcards.findIndex((i) => (i == index)) >= 0
   )
 
-  const FlipButton = props => (
+  const ShowAnswerButton = props => (
     <Button
       size="small"
       className={props.classes.button}
-      onClick={handleFlip}
+      onClick={handleRevealAnswer}
     >
-      Flip
+      Reveal answer
     </Button>
   )
   // https://material-ui.com/guides/composition/
-  FlipButton.muiName = 'Button'
+  ShowAnswerButton.muiName = 'Button'
 
   const SkipButton = props => (
     <Button
@@ -108,7 +109,7 @@ const FlashcardDeck = (props) => {
                 />
                 <div>
                   <SkipButton {...props} />
-                  <FlipButton  {...props} />
+                  <ShowAnswerButton  {...props} />
                 </div>
               </div>
               <div style={{display: flippedCard === props.currentFlashcard ? 'block' : 'none'}}>
@@ -123,7 +124,6 @@ const FlashcardDeck = (props) => {
                 />
                 <div>
                   <GotItButton {...props} />
-                  <FlipButton  {...props} />
                 </div>
               </div>
             </StepContent>
