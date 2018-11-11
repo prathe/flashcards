@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from "@material-ui/core/Stepper"
 import Step from "@material-ui/core/Step"
@@ -10,17 +10,37 @@ import { throwFlashcard, skipFlashcard } from '../../redux/actions'
 import FlashcardsActions from './FlashcardsActions'
 
 const FlashcardDeck = (props) => {
+  const [flippedCard, setflippedCard] = useState()
+
   const handleSkip = () => {
     props.dispatch(skipFlashcard(props.currentFlashcard))
+    setflippedCard()
   }
 
   const handleGotIt = () => {
     props.dispatch(throwFlashcard(props.currentFlashcard))
+    setflippedCard()
+  }
+
+  const handleFlip = () => {
+    setflippedCard(flippedCard !== props.currentFlashcard ? props.currentFlashcard : null)
   }
 
   const isStepCompleted = index => (
     props.completedFlashcards.findIndex((i) => (i == index)) >= 0
   )
+
+  const FlipButton = props => (
+    <Button
+      size="small"
+      className={props.classes.button}
+      onClick={handleFlip}
+    >
+      Flip
+    </Button>
+  )
+  // https://material-ui.com/guides/composition/
+  FlipButton.muiName = 'Button'
 
   const SkipButton = props => (
     <Button
@@ -67,18 +87,35 @@ const FlashcardDeck = (props) => {
           >
             <StepLabel />
             <StepContent icon="">
-              <TextField
-                id="outlined-textarea"
-                label="Question"
-                placeholder="Question here..."
-                multiline
-                margin="normal"
-                variant="outlined"
-                value={recto}
-              />
-              <div>
-                <SkipButton {...props} />
-                <GotItButton {...props} />
+              <div style={{display: flippedCard !== props.currentFlashcard ? 'block' : 'none'}}>
+                <TextField
+                  id="outlined-textarea"
+                  label="Question"
+                  placeholder="Question here..."
+                  multiline
+                  margin="normal"
+                  variant="outlined"
+                  value={recto}
+                />
+                <div>
+                  <SkipButton {...props} />
+                  <FlipButton  {...props} />
+                </div>
+              </div>
+              <div style={{display: flippedCard === props.currentFlashcard ? 'block' : 'none'}}>
+                <TextField
+                  id="outlined-textarea"
+                  label="Answer"
+                  placeholder="Answer here..."
+                  multiline
+                  margin="normal"
+                  variant="outlined"
+                  value={verso}
+                />
+                <div>
+                  <GotItButton {...props} />
+                  <FlipButton  {...props} />
+                </div>
               </div>
             </StepContent>
           </Step>
