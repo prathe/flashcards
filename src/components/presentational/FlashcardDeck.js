@@ -22,6 +22,10 @@ const FlashcardDeck = (props) => {
     setflippedCard()
   }
 
+  const handleReset = () => {
+    setflippedCard()
+  }
+
   const handleFlip = () => {
     setflippedCard(flippedCard !== props.currentFlashcard ? props.currentFlashcard : null)
   }
@@ -122,7 +126,7 @@ const FlashcardDeck = (props) => {
         )
       })}
     </Stepper>
-    <FlashcardsActions {...props} />
+    <FlashcardsActions onClick={handleReset} {...props} />
     </>
   )
 }

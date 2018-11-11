@@ -5,9 +5,10 @@ import AddIcon from '@material-ui/icons/Add'
 import { resetFlashcards, addFlashcard } from '../../redux/actions'
 
 const FalshcardsActions = (props) => {
-  const handleReset = () => (
+  const handleReset = () => {
     props.dispatch(resetFlashcards())
-  )
+    props.onClick()
+  }
 
   const handleAdd = () => {
     props.dispatch(addFlashcard())
