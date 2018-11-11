@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from "@material-ui/core/Stepper"
 import Step from "@material-ui/core/Step"
-import StepLabel from "@material-ui/core/StepLabel"
+import StepButton from "@material-ui/core/StepButton"
 import StepContent from "@material-ui/core/StepContent"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import { throwFlashcard, skipFlashcard } from '../../redux/actions'
+import { throwFlashcard, skipFlashcard, jumpToFlashcard } from '../../redux/actions'
 import FlashcardsActions from './FlashcardsActions'
 
 const FlashcardDeck = (props) => {
@@ -28,6 +28,11 @@ const FlashcardDeck = (props) => {
 
   const handleFlip = () => {
     setflippedCard(flippedCard !== props.currentFlashcard ? props.currentFlashcard : null)
+  }
+
+  const handleStep = index => () => {
+    props.dispatch(jumpToFlashcard(index))
+    setflippedCard()
   }
 
   const isStepCompleted = index => (
@@ -89,7 +94,7 @@ const FlashcardDeck = (props) => {
             key={index}
             completed={isStepCompleted(index)}
           >
-            <StepLabel />
+            <StepButton onClick={handleStep(index)} />
             <StepContent icon="">
               <div style={{display: flippedCard !== props.currentFlashcard ? 'block' : 'none'}}>
                 <TextField

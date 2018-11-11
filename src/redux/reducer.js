@@ -1,4 +1,4 @@
-import { THROW_FLASHCARD, SKIP_FLASHCARD, RESET_FLASHCARD, ADD_FLASHCARD } from './actions'
+import { THROW_FLASHCARD, SKIP_FLASHCARD, RESET_FLASHCARD, ADD_FLASHCARD, JUMP_TO_FLASHCARD } from './actions'
 
 const initialState = {
   name: 'My first deck',
@@ -66,6 +66,11 @@ const reducer = (state = initialState, action) => {
         ...state.flashcards,
         []
       ]
+    }
+  } else if (action.type == JUMP_TO_FLASHCARD) {
+    return {
+      ...state,
+      currentFlashcard: action.index
     }
   } else {
     return state
