@@ -23,10 +23,18 @@ const initialState = {
   ]
 };
 
+// Assuming current is never null
 const nextIndex = (current, max, except) => {
   if (except.length === max)
     return null;
-  return (current + 1) % max
+
+  const exceptSet = new Set(except)
+  for(let i = 1; i <= max; i += 1) {
+    let next = (current + i) % max
+    if (!exceptSet.has(next))
+      return next
+  }
+  return current
 }
 
 const reducer = (state = initialState, action) => {
