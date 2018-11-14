@@ -2,16 +2,15 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
-import { resetFlashcards, addFlashcard } from '../../redux/actions'
 
 const FalshcardsActions = (props) => {
   const handleReset = () => {
-    props.dispatch(resetFlashcards())
+    props.resetFlashcards()
     props.onClick()
   }
 
   const handleAdd = () => {
-    props.dispatch(addFlashcard())
+    props.addFlashcard()
   }
 
   return (

@@ -6,19 +6,18 @@ import StepButton from "@material-ui/core/StepButton"
 import StepContent from "@material-ui/core/StepContent"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import { throwFlashcard, skipFlashcard, jumpToFlashcard, revealAnswer } from '../../redux/actions'
 import FlashcardsActions from './FlashcardsActions'
 
 const FlashcardDeck = (props) => {
   const [flippedCard, setflippedCard] = useState()
 
   const handleSkip = () => {
-    props.dispatch(skipFlashcard(props.currentFlashcard))
+    props.skipFlashcard(props.currentFlashcard)
     setflippedCard()
   }
 
   const handleGotIt = () => {
-    props.dispatch(throwFlashcard(props.currentFlashcard))
+    props.throwFlashcard(props.currentFlashcard)
     setflippedCard()
   }
 
@@ -28,11 +27,11 @@ const FlashcardDeck = (props) => {
 
   const handleRevealAnswer = () => {
     setflippedCard(flippedCard !== props.currentFlashcard ? props.currentFlashcard : null)
-    props.dispatch(revealAnswer(props.currentFlashcard))
+    props.revealAnswer(props.currentFlashcard)
   }
 
   const handleStep = index => () => {
-    props.dispatch(jumpToFlashcard(index))
+    props.jumpToFlashcard(index)
     setflippedCard()
   }
 
