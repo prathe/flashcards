@@ -76,7 +76,7 @@ const FlashcardDeck = (props) => {
     </Button>
   )
   // https://material-ui.com/guides/composition/
-  SkipButton.muiName = 'Button'
+  GotItButton.muiName = 'Button'
 
   return (
     <>
