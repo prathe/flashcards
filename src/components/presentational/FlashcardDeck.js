@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import Stepper from "@material-ui/core/Stepper"
-import Step from "@material-ui/core/Step"
-import StepButton from "@material-ui/core/StepButton"
-import StepContent from "@material-ui/core/StepContent"
-import TextField from "@material-ui/core/TextField"
-import Button from "@material-ui/core/Button"
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepButton from '@material-ui/core/StepButton'
+import StepContent from '@material-ui/core/StepContent'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 import FlashcardsActions from './FlashcardsActions'
 
 const FlashcardDeck = (props) => {
@@ -86,8 +86,8 @@ const FlashcardDeck = (props) => {
       activeStep={props.currentFlashcard}
     >
       {props.flashcards.map((flashcard, index) => {
-        const recto= flashcard[0]
-        const verso= flashcard[1]
+        const recto = flashcard[0]
+        const verso = flashcard[1]
 
         return (
           <Step
@@ -96,7 +96,7 @@ const FlashcardDeck = (props) => {
           >
             <StepButton onClick={handleStep(index)} />
             <StepContent icon="">
-              <div style={{display: flippedCard !== props.currentFlashcard ? 'block' : 'none'}}>
+              <div style={{ display: flippedCard !== props.currentFlashcard ? 'block' : 'none' }}>
                 <TextField
                   id="outlined-textarea"
                   label="Question"
@@ -108,10 +108,10 @@ const FlashcardDeck = (props) => {
                 />
                 <div>
                   <SkipButton {...props} />
-                  <ShowAnswerButton  {...props} />
+                  <ShowAnswerButton {...props} />
                 </div>
               </div>
-              <div style={{display: flippedCard === props.currentFlashcard ? 'block' : 'none'}}>
+              <div style={{ display: flippedCard === props.currentFlashcard ? 'block' : 'none' }}>
                 <TextField
                   id="outlined-textarea"
                   label="Answer"
@@ -137,7 +137,7 @@ const FlashcardDeck = (props) => {
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   }
 })
 

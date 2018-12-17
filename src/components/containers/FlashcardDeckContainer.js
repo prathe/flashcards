@@ -13,7 +13,7 @@ const mapStateToProps = state => {
     name: state.name,
     currentFlashcard: state.currentFlashcard,
     completedFlashcards: state.completedFlashcards,
-    flashcards: state.flashcards,
+    flashcards: state.flashcards
   }
 }
 
@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => {
     resetFlashcards: () => dispatch({ type: RESET_FLASHCARD }),
     addFlashcard: () => dispatch({ type: ADD_FLASHCARD }),
     jumpToFlashcard: index => dispatch({ type: JUMP_TO_FLASHCARD, index }),
-    revealAnswer: index => dispatch({ type: REVEAL_ANSWER, index }),
+    revealAnswer: index => dispatch({ type: REVEAL_ANSWER, index })
   }
 }
 

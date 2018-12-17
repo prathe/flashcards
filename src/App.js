@@ -1,18 +1,18 @@
-import React from 'react';
-import { createStore } from 'redux';
+import React from 'react'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './reducers/root';
+import reducer from './reducers/root'
 
-import FlashardAppBarContainer from './components/containers/FlashardAppBarContainer';
-import FlashcardDeckContainer from './components/containers/FlashcardDeckContainer';
+import FlashardAppBarContainer from './components/containers/FlashardAppBarContainer'
+import FlashcardDeckContainer from './components/containers/FlashcardDeckContainer'
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import 'typeface-roboto';
+import CssBaseline from '@material-ui/core/CssBaseline'
+import 'typeface-roboto'
 
-const store = createStore(reducer);
+const store = createStore(reducer)
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
       <>
         <CssBaseline />
@@ -23,8 +23,8 @@ class App extends React.Component {
           </>
         </Provider>
       </>
-    );
+    )
   }
 }
 
-export default App;
+export default App
