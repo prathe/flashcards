@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -36,13 +37,13 @@ const FlashcardDeck = (props) => {
   }
 
   const isStepCompleted = index => (
-    props.completedFlashcards.findIndex((i) => (i == index)) >= 0
+    props.completedFlashcards.findIndex((i) => (i === index)) >= 0
   )
 
-  const ShowAnswerButton = props => (
+  const ShowAnswerButton = classes => (
     <Button
       size="small"
-      className={props.classes.button}
+      className={classes.button}
       onClick={handleRevealAnswer}
     >
       Reveal answer
@@ -51,11 +52,11 @@ const FlashcardDeck = (props) => {
   // https://material-ui.com/guides/composition/
   ShowAnswerButton.muiName = 'Button'
 
-  const SkipButton = props => (
+  const SkipButton = classes => (
     <Button
       variant="contained"
       size="small"
-      className={props.classes.button}
+      className={classes.button}
       onClick={handleSkip}
     >
       Skip
@@ -64,12 +65,12 @@ const FlashcardDeck = (props) => {
   // https://material-ui.com/guides/composition/
   SkipButton.muiName = 'Button'
 
-  const GotItButton = props => (
+  const GotItButton = classes => (
     <Button
       variant="contained"
       color="primary"
       size="small"
-      className={props.classes.button}
+      className={classes.button}
       onClick={handleGotIt}
     >
       GOT IT
@@ -107,8 +108,8 @@ const FlashcardDeck = (props) => {
                   value={recto}
                 />
                 <div>
-                  <SkipButton {...props} />
-                  <ShowAnswerButton {...props} />
+                  <SkipButton classes={props.classes} />
+                  <ShowAnswerButton classes={props.classes} />
                 </div>
               </div>
               <div style={{ display: flippedCard === props.currentFlashcard ? 'block' : 'none' }}>
@@ -122,7 +123,7 @@ const FlashcardDeck = (props) => {
                   value={verso}
                 />
                 <div>
-                  <GotItButton {...props} />
+                  <GotItButton classes={props.classes} />
                 </div>
               </div>
             </StepContent>
@@ -133,6 +134,16 @@ const FlashcardDeck = (props) => {
     <FlashcardsActions onClick={handleReset} {...props} />
     </>
   )
+}
+
+FlashcardDeck.propTypes = {
+  currentFlashcard: PropTypes.number.isRequired,
+  completedFlashcards: PropTypes.arrayOf(PropTypes.number).isRequired,
+  skipFlashcard: PropTypes.func.isRequired,
+  throwFlashcard: PropTypes.func.isRequired,
+  jumpToFlashcard: PropTypes.func.isRequired,
+  revealAnswer: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 const styles = theme => ({

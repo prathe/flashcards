@@ -44,7 +44,7 @@ const reducer = (state = initialState, action) => {
   // Throwing a flashcard means you're done with it.
   // Show the next flashcard in the remaining deck.
   // currentFlashcard may be set to null if no one remains.
-  if (action.type == THROW_FLASHCARD) {
+  if (action.type === THROW_FLASHCARD) {
     if (action.index === null) { return state }
 
     // Don't dupplicate array elements
@@ -58,16 +58,16 @@ const reducer = (state = initialState, action) => {
       currentFlashcard: currentFlashcard,
       completedFlashcards: completedFlashcards
     }
-  } else if (action.type == SKIP_FLASHCARD) {
+  } else if (action.type === SKIP_FLASHCARD) {
     const currentFlashcard = nextIndex(state.currentFlashcard, state.flashcards.length, state.completedFlashcards)
 
     return {
       ...state,
       currentFlashcard: currentFlashcard
     }
-  } else if (action.type == RESET_FLASHCARD) {
+  } else if (action.type === RESET_FLASHCARD) {
     return initialState
-  } else if (action.type == ADD_FLASHCARD) {
+  } else if (action.type === ADD_FLASHCARD) {
     return {
       ...state,
       currentFlashcard: state.flashcards.length,
@@ -76,12 +76,12 @@ const reducer = (state = initialState, action) => {
         []
       ]
     }
-  } else if (action.type == JUMP_TO_FLASHCARD) {
+  } else if (action.type === JUMP_TO_FLASHCARD) {
     return {
       ...state,
       currentFlashcard: action.index
     }
-  } else if (action.type == REVEAL_ANSWER) {
+  } else if (action.type === REVEAL_ANSWER) {
     let completedFlashcards = state.completedFlashcards
     if (completedFlashcards.findIndex((i) => (i === action.index)) < 0) { completedFlashcards = completedFlashcards.concat([action.index]) }
     return {
